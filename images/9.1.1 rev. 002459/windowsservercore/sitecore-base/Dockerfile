@@ -24,4 +24,4 @@ RUN $env:INSTALL_TEMP = 'C:\\install'; `
     Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name ServerPriorityTimeLimit -Value 0 -Type DWord; `
     setx /M PATH $($env:PATH + ';C:\Sitecore\Scripts'); `
     Remove-Website -Name 'Default Web Site'; `
-    Remove-Item -Path $env:INSTALL_TEMP -Force -Recurse;
+    #Remove-Item -Path $env:INSTALL_TEMP -Force -Recurse;

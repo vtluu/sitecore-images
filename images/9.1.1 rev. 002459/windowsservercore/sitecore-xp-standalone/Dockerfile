@@ -18,8 +18,11 @@ RUN $env:SIF_CONFIG = 'sitecore-XP0.json'; `
     $config.Tasks.InstallWDP.Params.Arguments | Add-Member -Name 'Skip' -Value @(@{'ObjectName' = 'dbDacFx'}, @{'ObjectName' = 'dbFullSql'}) -MemberType NoteProperty; `
     $config.Variables.'Site.PhysicalPath' = 'C:\inetpub\{0}' -f $env:SITENAME; `
     ConvertTo-Json $config -Depth 50 | Set-Content -Path (Join-Path $env:INSTALL_TEMP $env:SIF_CONFIG); `
-    Rename-Item -Path (Resolve-Path (Join-Path $env:INSTALL_TEMP $env:SIF_CONFIG)).Path -NewName 'config.json'; `
-    Rename-Item -Path (Resolve-Path (Join-Path $env:INSTALL_TEMP $env:SIF_PACKAGE)).Path -NewName 'package.zip';
+    #Rename-Item -Path (Resolve-Path (Join-Path $env:INSTALL_TEMP $env:SIF_CONFIG)).Path -NewName 'config.json'; `
+    #Rename-Item -Path (Resolve-Path (Join-Path $env:INSTALL_TEMP $env:SIF_PACKAGE)).Path -NewName 'package.zip';
+    Copy-Item (Join-Path $env:INSTALL_TEMP $env:SIF_CONFIG) (Join-Path $env:INSTALL_TEMP 'config.json'); `
+    Copy-Item (Join-Path $env:INSTALL_TEMP $env:SIF_PACKAGE) (Join-Path $env:INSTALL_TEMP 'package.zip');
+
 
 FROM $BASE_IMAGE
 
